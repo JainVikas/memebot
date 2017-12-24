@@ -2,8 +2,7 @@
 a fb messenger memebot using pymeme, memegen.link API and chatfuel
 Deployed on Heroku
 
-bot link: m.me/377263346054830
-
+connect with bot [here](http://m.me/377263346054830)
 have fun and create some dope meme. Please share the feedback.
 
 Next functionality:
