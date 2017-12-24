@@ -69,7 +69,7 @@ def images():
     }
 
     for i in range(9):
-        count=i + int(inputRecords)
+        i=i + int(inputRecords)
         resultTemplate={
                "buttons": [
                 {
@@ -112,7 +112,7 @@ def images():
            "buttons": [
             {
               "set_attributes": {
-                "inputRecords": count+1,
+                "inputRecords": i+1,
               },
               "block_names": [
                 "imageJson"
