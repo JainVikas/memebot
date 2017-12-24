@@ -137,7 +137,7 @@ def generateMeme():
           "attachment": {
             "type": "image",
             "payload": {
-              "url": imageInput+upperText+lowerText+ ".jpg"
+              "url": imageInput+upperText+"/"+lowerText+ ".jpg"
             }
           }
         }
