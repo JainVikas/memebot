@@ -52,7 +52,7 @@ def splitLink(exampleUrl):
 @app.route('/images', methods=['POST', 'GET'])
 def images():
     inputRecords = request.args.get('inputRecords')
-
+    print(inputRecords)
     galleryResponse= {
      "messages": [
     {
@@ -112,7 +112,7 @@ def images():
            "buttons": [
             {
               "set_attributes": {
-                "inputRecords": count,
+                "inputRecords": count+1,
               },
               "block_names": [
                 "JsonAPI call"
@@ -137,7 +137,7 @@ def generateMeme():
           "attachment": {
             "type": "image",
             "payload": {
-              "url": imageInput+upperText+lowerText+ ".jpg"
+              "url": imageInput+ upperText+ lowerText+ ".jpg"
             }
           }
         }
