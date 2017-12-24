@@ -52,7 +52,7 @@ def splitLink(exampleUrl):
 @app.route('/images', methods=['POST', 'GET'])
 def images():
     inputRecords = request.args.get('inputRecords')
-    print(inputRecords)
+
     galleryResponse= {
      "messages": [
     {
@@ -69,7 +69,7 @@ def images():
     }
 
     for i in range(9):
-        count=i#+inputRecords
+        count=i + inputRecords
         resultTemplate={
                "buttons": [
                 {
@@ -89,10 +89,10 @@ def images():
                 }
               ]
             }
-        print(i)
-        print(exampleUrlList[i])
+        #print(i)
+        #print(exampleUrlList[i])
         imageInput, upperText, lowerText = splitLink(exampleUrlList[i])
-        print(imageInput, upperText, lowerText)
+        #print(imageInput, upperText, lowerText)
         if upperText !=" ":
             resultTemplate['title']= upperText
             resultTemplate['subtitle']= lowerText
@@ -104,18 +104,18 @@ def images():
         resultTemplate["buttons"][0]["set_attributes"]["imageInput"]= imageInput
         resultTemplate["buttons"][0]["set_attributes"]["upperText"]= upperText
         resultTemplate["buttons"][0]["set_attributes"]["lowerText"]= lowerText
-        print(resultTemplate)
+        #print(resultTemplate)
         galleryResponse['messages'][0]['attachment']['payload']['elements'].append(resultTemplate)
-        print(galleryResponse)
+        #print(galleryResponse)
         
     moreResult= {'title':"want to see more",
            "buttons": [
             {
               "set_attributes": {
-                "inputRecords": count+1,
+                "inputRecords": count,
               },
               "block_names": [
-                "JsonAPI call"
+                "imageJson"
               ],
               "type": "show_block",
               "title": "show more"
@@ -137,7 +137,7 @@ def generateMeme():
           "attachment": {
             "type": "image",
             "payload": {
-              "url": imageInput+ upperText+ lowerText+ ".jpg"
+              "url": imageInput+upperText+lowerText+ ".jpg"
             }
           }
         }
