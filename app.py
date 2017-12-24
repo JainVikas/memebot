@@ -131,6 +131,9 @@ def generateMeme():
     imageInput = request.args.get('imageInput')
     upperText = request.args.get('upperText')
     lowerText = request.args.get('lowerText')
+    print(imageInput,upperText,lowerText)
+    print( imageInput+upperText+"/"+lowerText+ ".jpg")
+    print(type( imageInput+upperText+"/"+lowerText+ ".jpg"))
     result = {
       "messages": [
         {
