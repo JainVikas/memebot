@@ -129,8 +129,8 @@ def images():
 @app.route('/generateMEME', methods=['POST', 'GET'])
 def generateMeme():
     imageInput = request.args.get('imageInput')
-    upperText = request.args.get('upperText')
-    lowerText = request.args.get('lowerText')
+    upperText = request.args.get('upperTextInput')
+    lowerText = request.args.get('lowerTextInput')
     print(imageInput,upperText,lowerText)
     print( imageInput+upperText+"/"+lowerText+ ".jpg")
     print(type( imageInput+upperText+"/"+lowerText+ ".jpg"))
