@@ -142,8 +142,10 @@ def images():
 def cloudinaryImage(upperText,lowerText,imageInput):
     tr=[]
     if upperText != "-" and upperText != "_":
+        upperText = upperText.replace(" ","%20")
         tr.append({"overlay": "text:Roboto_40_bold_letter_spacing_5:"+upperText, "y":30, "gravity":"north","color":"#ffffff"})
     if lowerText!="-" and lowerText!="_":
+        lowerText = lowerText.replace(" ","%20")
         tr.append({"overlay": "text:Roboto_40_bold_letter_spacing_5:"+lowerText, "y":30, "gravity":"south","color":"#ffffff"})
     #sample pload
     try: 
