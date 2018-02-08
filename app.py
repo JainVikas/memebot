@@ -141,7 +141,7 @@ def images():
 
 def cloudinaryImage(upperText,lowerText,imageInput):
     tr=[]
-    if upperText is not "-" and upperText is not "_":
+    if upperText != "-" and upperText != "_":
         tr.append({"overlay": "text:Roboto_60_bold_letter_spacing_10:"+upperText, "y":30, "gravity":"north","color":"#ffffff"})
     if lowerText!="-" and lowerText!="_":
         tr.append({"overlay": "text:Roboto_60_bold_letter_spacing_10:"+lowerText, "y":30, "gravity":"south","color":"#ffffff"})
@@ -168,9 +168,9 @@ def generateMeme():
     print(imageInput,upperText,lowerText, imagetype)
     print( imageInput+upperText+"/"+lowerText+ ".jpg")
     print(type( imageInput+upperText+"/"+lowerText+ ".jpg"))
-    if imagetype is "template":
+    if imagetype == "template":
         result = {"messages": [{"attachment": {"type": "image","payload": { "url": imageInput+upperText+"/"+lowerText+ ".jpg"}}}]}
-    elif imagetype is "user entered":
+    elif imagetype == "user entered":
         if 'jpg' in imageInput:
             result = {"messages": [{"attachment": {"type": "image","payload": { "url": cloudinaryImage(upperText,lowerText,imageInput)}}}]}
         else:
