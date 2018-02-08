@@ -142,9 +142,9 @@ def images():
 def cloudinaryImage(upperText,lowerText,imageInput):
     tr=[]
     if upperText != "-" and upperText != "_":
-        tr.append({"overlay": "text:Roboto_60_bold_letter_spacing_10:"+upperText, "y":30, "gravity":"north","color":"#ffffff"})
+        tr.append({"overlay": "text:Roboto_40_bold_letter_spacing_5:"+upperText, "y":30, "gravity":"north","color":"#ffffff"})
     if lowerText!="-" and lowerText!="_":
-        tr.append({"overlay": "text:Roboto_60_bold_letter_spacing_10:"+lowerText, "y":30, "gravity":"south","color":"#ffffff"})
+        tr.append({"overlay": "text:Roboto_40_bold_letter_spacing_5:"+lowerText, "y":30, "gravity":"south","color":"#ffffff"})
     #sample pload
     try: 
         data = upload(imageInput)
@@ -166,8 +166,8 @@ def generateMeme():
     lowerText = request.args.get('lowerTextInput')
     imagetype = request.args.get('imagetype')
     print(imageInput,upperText,lowerText, imagetype)
-    print( imageInput+upperText+"/"+lowerText+ ".jpg")
-    print(type( imageInput+upperText+"/"+lowerText+ ".jpg"))
+    #print( imageInput+upperText+"/"+lowerText+ ".jpg")
+    #print(type( imageInput+upperText+"/"+lowerText+ ".jpg"))
     if imagetype == "template":
         result = {"messages": [{"attachment": {"type": "image","payload": { "url": imageInput+upperText+"/"+lowerText+ ".jpg"}}}]}
     elif imagetype == "userentered":
