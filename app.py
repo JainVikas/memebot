@@ -176,7 +176,7 @@ def generateMeme():
         if 'jpg' in imageInput:
             result = {"messages": [{"attachment": {"type": "image","payload": { "url": str(cloudinaryImage(upperText,lowerText,imageInput))}}}]}
         else:
-            result = {{"redirect_to_blocks": ["userImage"]},{"messages":[ {"text": "well, i needed an image, not this."}]}}
+            result = {{"messages":[ {"text": "well, i needed an image, not this."},{"redirect_to_blocks": ["userImage"]}]}}
     return jsonify(result)
 if __name__ == '__main__':
   app.debug = True
