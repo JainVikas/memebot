@@ -170,7 +170,7 @@ def generateMeme():
     print(type( imageInput+upperText+"/"+lowerText+ ".jpg"))
     if imagetype == "template":
         result = {"messages": [{"attachment": {"type": "image","payload": { "url": imageInput+upperText+"/"+lowerText+ ".jpg"}}}]}
-    elif imagetype == "user entered":
+    elif imagetype == "userentered":
         if 'jpg' in imageInput:
             result = {"messages": [{"attachment": {"type": "image","payload": { "url": cloudinaryImage(upperText,lowerText,imageInput)}}}]}
         else:
