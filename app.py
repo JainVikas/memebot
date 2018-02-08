@@ -7,6 +7,15 @@ Created on Sat Dec 23 16:11:41 2017
 from flask import Flask, request, jsonify
 import os
 from pymeme import *
+import cloudinary
+
+#set configuration
+cloudinary.config(
+  cloud_name = 'vikas91',  
+  api_key = '842545438591146',  
+  api_secret = 'l5vxvn-Cp1BAU9h1ifafcoc5u4I'  
+)
+from cloudinary.uploader import upload
 
 app = Flask(__name__)
 app.secret_key = 'F12Zr47j\3yX R~X@H!jmM]Lwf/,?KT'
@@ -80,7 +89,8 @@ def images():
                   "set_attributes": {
                     "imageInput": "some value",
                     "upperText": "another value",
-                    "lowerText": "lower text value"
+                    "lowerText": "lower text value",
+                    "imagetype":"template"
                   },
                   "block_names": [
                     "Routing"
@@ -129,27 +139,42 @@ def images():
     galleryResponse['messages'][0]['attachment']['payload']['elements'].append(moreResult)
     return jsonify(galleryResponse)
 
-
+def cloudinaryImage(upperText,lowerText,imageInput):
+    tr=[]
+    if upperText!="-" and upperText!="_":
+        tr.append({"overlay": "text:Roboto_60_bold_letter_spacing_10:"+upperText, "y":30, "gravity":"north","color":"#ffffff"})
+    if lowerText!="-" and lowerText!="_":
+        tr.append({"overlay": "text:Roboto_60_bold_letter_spacing_10:"+lowerText, "y":30, "gravity":"south","color":"#ffffff"})
+    #sample pload
+    try: 
+        data = upload(imageInput)
+    except:
+        data = upload(imageInput)
+    #it return dictionary 
+    #use public_id to access and manipulate going forward
+    public_id = data['public_id']
+	#also extract format, whether it is  jpg or png
+    img_format = data['format']
+    img = cloudinary.CloudinaryImage(public_id).image(transformation=tr)
+    url = img[10:-3]+"."+img_format
+    print(url)
+    return url
 @app.route('/generateMEME', methods=['POST', 'GET'])
 def generateMeme():
     imageInput = request.args.get('imageInput')
     upperText = request.args.get('upperTextInput')
     lowerText = request.args.get('lowerTextInput')
-    print(imageInput,upperText,lowerText)
+    imagetype = request.args.get('imagetype')
+    print(imageInput,upperText,lowerText, imagetype)
     print( imageInput+upperText+"/"+lowerText+ ".jpg")
     print(type( imageInput+upperText+"/"+lowerText+ ".jpg"))
-    result = {
-      "messages": [
-        {
-          "attachment": {
-            "type": "image",
-            "payload": {
-              "url": imageInput+upperText+"/"+lowerText+ ".jpg"
-            }
-          }
-        }
-      ]
-    }
+    if imagetype=="template":
+        result = {"messages": [{"attachment": {"type": "image","payload": { "url": imageInput+upperText+"/"+lowerText+ ".jpg"}}}]}
+    else imagetype=="user entered":
+	    if 'jpg' in imageInput:
+	        result = {"messages": [{"attachment": {"type": "image","payload": { "url": cloudinaryImage(upperText,lowerText,imageInput)}}}]}
+        else:
+            result = {"messages":[ {"text": "well, i needed an image, not this."},{"redirect_to_blocks": ["user image"]}]}
     return jsonify(result)
 if __name__ == '__main__':
   app.debug = True
