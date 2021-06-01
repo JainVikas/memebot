@@ -1,6 +1,6 @@
 Flask==0.10.1
 future==0.16.0
-urllib3==1.21.1
+urllib3==1.26.5
 Werkzeug==0.15.3
 pymeme==1.0.0
 cloudinary==1.10.0
